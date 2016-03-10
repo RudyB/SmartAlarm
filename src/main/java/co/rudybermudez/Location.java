@@ -1,5 +1,12 @@
 package co.rudybermudez;
 
+/*
+ * @Author:  Rudy Bermudez
+ * @Email:   hello@rudybermudez.co
+ * @Date:    Mar 10, 2016
+ * @Project: SmartAlarm
+ */
+
 import com.amazonaws.util.json.JSONException;
 import com.amazonaws.util.json.JSONObject;
 
@@ -18,7 +25,6 @@ public class Location {
     private String mTimeZone;
     private String mJsonData;
 
-
     public Location(Units units, String apiKey) {
         mApiKey = apiKey;
         mUnits = units;
@@ -32,6 +38,64 @@ public class Location {
         mState = stateName;
         getLatitudeLongitude();
         loadTimezone();
+    }
+
+    public Units getUnits() {
+        return mUnits;
+    }
+
+    public String getApiKey() {
+        return mApiKey;
+    }
+
+
+
+    public String getCity() {
+        return mCity;
+    }
+
+    public void setCity(String city) {
+        mCity = city;
+    }
+
+    public String getState() {
+        return mState;
+    }
+
+    public void setState(String state) {
+        mState = state;
+    }
+
+    public double getLatitude() {
+        return mLatitude;
+    }
+
+    public void setLatitude(double latitude) {
+        mLatitude = latitude;
+    }
+
+    public String getJsonData() {
+        return mJsonData;
+    }
+
+    public void setJsonData(String jsonData) {
+        mJsonData = jsonData;
+    }
+
+    public double getLongitude() {
+        return mLongitude;
+    }
+
+    public void setLongitude(double longitude) {
+        mLongitude = longitude;
+    }
+
+    public String getTimeZone() {
+        return mTimeZone;
+    }
+
+    public void setTimeZone(String timeZone) {
+        mTimeZone = timeZone;
     }
 
     private void geoLocation() {
@@ -81,55 +145,6 @@ public class Location {
         }
     }
 
-    public String getCity() {
-        return mCity;
-    }
-
-    public void setCity(String city) {
-        mCity = city;
-    }
-
-    public String getState() {
-        return mState;
-    }
-
-    public void setState(String state) {
-        mState = state;
-    }
-
-    public double getLatitude() {
-        return mLatitude;
-    }
-
-    public void setLatitude(double latitude) {
-        mLatitude = latitude;
-
-    }
-
-    public String getJsonData() {
-        return mJsonData;
-    }
-
-    public void setJsonData(String jsonData) {
-        mJsonData = jsonData;
-    }
-
-    public double getLongitude() {
-        return mLongitude;
-    }
-
-    public void setLongitude(double longitude) {
-        mLongitude = longitude;
-    }
-
-    public String getTimeZone() {
-        return mTimeZone;
-    }
-
-    public void setTimeZone(String timeZone) {
-        mTimeZone = timeZone;
-    }
-
     private String saltLocationInput(String locationName) {
         if (locationName.contains(" ")) {
             String[] arrCity = locationName.split(" ");
@@ -158,4 +173,4 @@ public class Location {
             this.unitHTML = unitHTML;
         }
     }
-    }
+}
