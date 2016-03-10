@@ -5,9 +5,12 @@
  * @Project: SmartAlarm
  */
 
+import co.rudybermudez.SmartAlarm;
+
 public class Main {
 
     public static void main(String[] args) {
+        new SmartAlarm().run();
     }
 
 }
