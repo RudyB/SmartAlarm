@@ -1,4 +1,4 @@
-package co.rudybermudez;
+package co.rudybermudez.sports;
 
 /*
  * @Author:  Rudy Bermudez
@@ -8,6 +8,7 @@ package co.rudybermudez;
  * @Package: co.rudybermudez
  */
 
+import co.rudybermudez.JsonEngine;
 import com.amazonaws.util.json.JSONArray;
 import com.amazonaws.util.json.JSONException;
 import com.amazonaws.util.json.JSONObject;
@@ -23,7 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class Sports {
+public class Soccer {
 
     private JSONObject initConnection(String sUrl) throws IOException, JSONException {
         OkHttpClient client = new OkHttpClient();
