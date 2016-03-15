@@ -8,12 +8,14 @@ package co.rudybermudez;
  * @Package: co.rudybermudez
  */
 
+import co.rudybermudez.weather.Weather;
 import com.amazonaws.util.json.JSONException;
 import com.amazonaws.util.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.TreeMap;
 
 public class Location {
 
@@ -48,7 +50,6 @@ public class Location {
     public String getApiKey() {
         return mApiKey;
     }
-
 
 
     public String getCity() {
@@ -159,19 +160,21 @@ public class Location {
             return locationName;
         }
     }
-
     public enum Units {
-        IMPERIAL("fahrenheit", "MPH", "us"),
-        METRIC("celsius", "km/h", "si");
+        IMPERIAL("fahrenheit", "MPH", "us", Weather.ImperialWindMap()),
+        METRIC("celsius", "km/h", "si", Weather.MetricWindMap());
 
         public final String unitTemperature;
         public final String unitSpeed;
         public final String unitHTML;
+        public final TreeMap<Integer, String> windSpeedMap;
 
-        Units(String unitTemperature, String unitSpeed, String unitHTML) {
+
+        Units(String unitTemperature, String unitSpeed, String unitHTML, TreeMap<Integer, String> windSpeedMap) {
             this.unitTemperature = unitTemperature;
             this.unitSpeed = unitSpeed;
             this.unitHTML = unitHTML;
+            this.windSpeedMap = windSpeedMap;
         }
     }
 }
