@@ -9,6 +9,7 @@ package co.rudybermudez;
  */
 
 import co.rudybermudez.news.NewsReport;
+import co.rudybermudez.sports.Soccer;
 import co.rudybermudez.weather.Weather;
 
 public class TextCompiler {
@@ -66,11 +67,11 @@ public class TextCompiler {
             if (mConfig.getEnableNews())
                 newsTxt = (new NewsReport().getCurrentStories(mConfig.getNewsSource(), mConfig.getNumberOfStories()));
 
-            // Sports
+            // Soccer
             String sportsTxt = "";
             if (mConfig.getEnableSports()) {
-                Sports sports = new Sports();
-                sportsTxt = sports.getUpcomingGames() + sports.getLeagueTable();
+                Soccer soccer = new Soccer();
+                sportsTxt = soccer.getUpcomingGames() + soccer.getLeagueTable();
             }
             return String.format("%s \n\n%s \n\n%s \n%s%s \n\n%s", helloGreeting, weatherTxt, btcTxt, newsTxt, sportsTxt, goodbyeGreeting);
         }
