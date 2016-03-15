@@ -1,4 +1,5 @@
 /SmartAlarmConfig.properties
+/src/main/resources/client_secret.json
 ### Finale template
 *.bak
 *.db
@@ -82,7 +83,7 @@ hs_err_pid*
 # .idea/dataSources.xml
 # .idea/sqlDataSources.xml
 # .idea/dynamic.xml
-/src/main/resources/client_secret.json
+
 # .idea/uiDesigner.xml
 
 # Gradle:
