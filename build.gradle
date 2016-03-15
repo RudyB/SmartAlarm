@@ -14,4 +14,8 @@ dependencies {
     compile 'com.ivona:ivona-speechcloud-sdk-java:1.0.0'
     compile 'javazoom:jlayer:1.0.1'
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'com.google.api-client:google-api-client:1.20.0'
+    compile 'com.google.oauth-client:google-oauth-client-jetty:1.20.0'
+    compile 'com.google.apis:google-api-services-calendar:v3-rev125-1.20.0'
+
 }

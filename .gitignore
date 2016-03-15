@@ -82,6 +82,7 @@ hs_err_pid*
 # .idea/dataSources.xml
 # .idea/sqlDataSources.xml
 # .idea/dynamic.xml
+/src/main/resources/client_secret.json
 # .idea/uiDesigner.xml
 
 # Gradle:
