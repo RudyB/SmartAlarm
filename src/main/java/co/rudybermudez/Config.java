@@ -39,7 +39,7 @@ public class Config {
         Properties properties = new Properties();
         OutputStream output = null;
         try {
-            output = new FileOutputStream("config.properties");
+            output = new FileOutputStream("SmartAlarmConfig.properties");
             //Set Default Properties
             properties.setProperty("Your_First_Name", "Bob");
             properties.setProperty("Enable_Weather", "true");
@@ -57,7 +57,7 @@ public class Config {
             properties.setProperty("ForecastIoApiKey", "accessKey");
             properties.setProperty("playSong", "false");
             properties.setProperty("songLocation", "Had to Hear.mp3");
-            properties.store(output, null);
+            properties.store(output, "Smart Alarm Configuration");
 
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -76,7 +76,7 @@ public class Config {
         Properties properties = new Properties();
         InputStream input = null;
         try {
-            input = new FileInputStream("config.properties");
+            input = new FileInputStream("SmartAlarmConfig.properties");
             // Load Properties
             properties.load(input);
             // Get Property Values and store them to Hash Map
@@ -119,7 +119,7 @@ public class Config {
     }
 
     private void checkForConfigFile() throws Exception {
-        File file = new File("config.properties");
+        File file = new File("SmartAlarmConfig.properties");
         if (!file.exists()) {
             makeProperties();
             throw new Exception("Please configure the config file and run the application again.");
@@ -127,7 +127,7 @@ public class Config {
     }
 
     private void deleteConfigFile() {
-        new File("config.properties").delete();
+        new File("SmartAlarmConfig.properties").delete();
     }
 
     public String getUserName() {
