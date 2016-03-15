@@ -1,5 +1,13 @@
 package co.rudybermudez.news;
 
+/*
+ * @Author:  Rudy Bermudez
+ * @Email:   hello@rudybermudez.co
+ * @Date:    Mar 10, 2016
+ * @Project: SmartAlarm
+ * @Package: co.rudybermudez.news
+ */
+
 import co.rudybermudez.JsonEngine;
 import com.amazonaws.util.json.JSONObject;
 import de.vogella.rss.model.Feed;

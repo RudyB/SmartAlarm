@@ -5,7 +5,7 @@ package co.rudybermudez;
  * @Email:   hello@rudybermudez.co
  * @Date:    Mar 10, 2016
  * @Project: SmartAlarm
- * @Package:    co.rudybermudez
+ * @Package: co.rudybermudez
  */
 
 import com.amazonaws.util.json.JSONArray;
