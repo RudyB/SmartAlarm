@@ -70,7 +70,7 @@ public class TextCompiler {
             // Soccer
             String sportsTxt = "";
             if (mConfig.getEnableSports()) {
-                Soccer soccer = new Soccer();
+                Soccer soccer = new Soccer(location.getTimeZone());
                 sportsTxt = soccer.getUpcomingGames() + soccer.getLeagueTable();
             }
             return String.format("%s \n\n%s \n\n%s \n%s%s \n\n%s", helloGreeting, weatherTxt, btcTxt, newsTxt, sportsTxt, goodbyeGreeting);
