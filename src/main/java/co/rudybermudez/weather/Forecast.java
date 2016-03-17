@@ -15,19 +15,19 @@ import java.util.TimeZone;
 
 public class Forecast {
     // TODO:rmb 3/10/16 Add alerts
-    private String mTimezone;
-    private long mTime;
-    private double mCurrentTemperature;
-    private String mCurrentSummary;
-    private double mCurrentWindSpeed;
-    private double mApparentTemperature;
-    private String mSummary;
-    private long mSunriseTime;
-    private long mSunsetTime;
-    private double mMoonPhase;
-    private double mPrecipProbability;
-    private double mTemperatureMin;
-    private double mTemperatureMax;
+    private final String mTimezone;
+    private final long mTime;
+    private final double mCurrentTemperature;
+    private final String mCurrentSummary;
+    private final double mCurrentWindSpeed;
+    private final double mApparentTemperature;
+    private final String mSummary;
+    private final long mSunriseTime;
+    private final long mSunsetTime;
+    private final double mMoonPhase;
+    private final double mPrecipProbability;
+    private final double mTemperatureMin;
+    private final double mTemperatureMax;
 
     public Forecast(String timezone, long time, double currentTemperature, String currentSummary, double currentWindSpeed, double apparentTemperature, String summary, long sunriseTime, long sunsetTime, double moonPhase, double precipProbability, double temperatureMin, double temperatureMax) {
         mTimezone = timezone;

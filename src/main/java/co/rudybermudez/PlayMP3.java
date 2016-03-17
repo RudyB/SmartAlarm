@@ -14,14 +14,14 @@ import java.io.FileInputStream;
 
 public class PlayMP3 {
 
-    private static void loadPlayer(String filelocation) {
+    private static void loadPlayer(String fileLocation) {
         try {
-            FileInputStream fis = new FileInputStream(filelocation);
+            FileInputStream fis = new FileInputStream(fileLocation);
             Player playMP3 = new Player(fis);
             playMP3.play();
 
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 

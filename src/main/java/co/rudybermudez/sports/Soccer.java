@@ -1,4 +1,4 @@
-package co.rudybermudez;
+package co.rudybermudez.sports;
 
 /*
  * @Author:  Rudy Bermudez
@@ -8,6 +8,7 @@ package co.rudybermudez;
  * @Package: co.rudybermudez
  */
 
+import co.rudybermudez.JsonEngine;
 import com.amazonaws.util.json.JSONArray;
 import com.amazonaws.util.json.JSONException;
 import com.amazonaws.util.json.JSONObject;
@@ -17,13 +18,17 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
-public class Sports {
+public class Soccer {
+    private final String mGameDatePattern = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+
+    private final String mTimezone;
+
+    public Soccer(String timezone) {
+        mTimezone = timezone;
+    }
 
     private JSONObject initConnection(String sUrl) throws IOException, JSONException {
         OkHttpClient client = new OkHttpClient();
@@ -67,30 +72,6 @@ public class Sports {
         }
     }
 
-    private String getDaysUntilGame(String gameDate) throws ParseException {
-        DateFormat apiFormat = new SimpleDateFormat("yyyy-M-dd'T'h:m:s'Z'");
-        Date dateOfGame = apiFormat.parse(gameDate);
-        long lGameDate = dateOfGame.getTime();
-        long currDate = new Date().getTime();
-        long difference = lGameDate - currDate;
-        Date timeDifference = new Date(difference);
-        String daysAway = new SimpleDateFormat("d").format(timeDifference);
-        Integer intDaysAway = Integer.parseInt(daysAway);
-        String resultIntro;
-        if (intDaysAway == 0) {
-            resultIntro = "Today";
-        }
-        if (intDaysAway == 1) {
-            resultIntro = "Tomorrow";
-        }
-        if (intDaysAway == 31) {
-            resultIntro = "Today";
-        } else {
-            resultIntro = String.format("In %s days,", daysAway);
-        }
-        return resultIntro;
-    }
-
     private String getStadiumName(String homeTeam) {
 
         String homeStadium;
@@ -109,10 +90,27 @@ public class Sports {
             String homeTeam = schedule.getJSONArray("fixtures").getJSONObject(gameNum).getString("homeTeamName");
             String awayTeam = schedule.getJSONArray("fixtures").getJSONObject(gameNum).getString("awayTeamName");
             String gameDate = schedule.getJSONArray("fixtures").getJSONObject(gameNum).getString("date");
-
-            String daysToGame = getDaysUntilGame(gameDate);
+            Integer homeTeamScore = schedule.getJSONArray("fixtures").getJSONObject(gameNum).getJSONObject("result").getInt("goalsHomeTeam");
+            Integer awayTeamScore = schedule.getJSONArray("fixtures").getJSONObject(gameNum).getJSONObject("result").getInt("goalsAwayTeam");
             String stadiumName = getStadiumName(homeTeam);
-            return String.format("%s %s takes on %s at %s.\n", daysToGame, awayTeam, homeTeam, stadiumName);
+
+            Game game = new Game(homeTeam, awayTeam, gameDate, homeTeamScore, awayTeamScore, stadiumName, mGameDatePattern, mTimezone);
+            if (game.hasStarted()) {
+                String score = "";
+                if (!game.getScoreHomeTeam().equals(-1) && !game.getScoreAwayTeam().equals(-1)) {
+                    if (game.getScoreHomeTeam() > game.getScoreAwayTeam()) {
+                        score = String.format("%s is currently leading %s, %s - %s.", game.getHomeTeam(), game.getAwayTeam(), game.getScoreHomeTeam(), game.getScoreAwayTeam());
+                    } else if (game.getScoreHomeTeam().equals(game.getScoreAwayTeam())) {
+                        score = String.format("The score is currently tied, %s - %s.", game.getScoreHomeTeam(), game.getScoreAwayTeam());
+                    } else {
+                        score = String.format("%s is currently leading %s, %s - %s.", game.getAwayTeam(), game.getHomeTeam(), game.getScoreAwayTeam(), game.getScoreHomeTeam());
+                    }
+                }
+                return String.format("%s is currently playing %s at %s. %s\n", game.getHomeTeam(), game.getAwayTeam(), game.getGameVenue(), score);
+            } else {
+                return String.format("%s, %s takes on %s at %s.\n", game.getDaysUntilGameAsString(), awayTeam, homeTeam, stadiumName);
+            }
+
         } catch (ParseException e) {
             throw new Exception("Error: The API for api.football-data.org has changed and the date cannot be parsed. Please notify the developer.");
         }

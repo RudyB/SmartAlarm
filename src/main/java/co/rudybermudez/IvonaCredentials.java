@@ -13,8 +13,8 @@ import com.amazonaws.auth.AWSCredentialsProvider;
 
 public class IvonaCredentials implements AWSCredentialsProvider {
 
-    private String mSecretKey;
-    private String mAccessKey;
+    private final String mSecretKey;
+    private final String mAccessKey;
 
     public IvonaCredentials(String mSecretKey, String mAccessKey) {
         super();
@@ -24,7 +24,7 @@ public class IvonaCredentials implements AWSCredentialsProvider {
 
     @Override
     public AWSCredentials getCredentials() {
-        AWSCredentials awsCredentials = new AWSCredentials() {
+        return new AWSCredentials() {
 
             @Override
             public String getAWSSecretKey() {
@@ -39,7 +39,6 @@ public class IvonaCredentials implements AWSCredentialsProvider {
             }
 
         };
-        return awsCredentials;
     }
 
     @Override

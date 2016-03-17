@@ -10,8 +10,8 @@ package co.rudybermudez.news;
 
 public class Story {
 
-    private String mTitle;
-    private String mAbstract;
+    private final String mTitle;
+    private final String mAbstract;
 
     public Story(String title, String anAbstract) {
         mTitle = title;
