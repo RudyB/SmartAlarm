@@ -160,6 +160,7 @@ public class Location {
             return locationName;
         }
     }
+
     public enum Units {
         IMPERIAL("fahrenheit", "MPH", "us", Weather.ImperialWindMap()),
         METRIC("celsius", "km/h", "si", Weather.MetricWindMap());

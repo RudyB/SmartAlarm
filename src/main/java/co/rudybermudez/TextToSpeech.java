@@ -24,14 +24,14 @@ import java.io.InputStream;
 
 public class TextToSpeech {
 
+    private final Config mConfig;
     private IvonaSpeechCloudClient speechCloud;
-    private Config mConfig;
 
     public TextToSpeech(Config config) {
         mConfig = config;
     }
 
-    private void init() throws Exception {
+    private void init() {
         speechCloud = new IvonaSpeechCloudClient(new IvonaCredentials(mConfig.getIvonaSecretKey(), mConfig.getIvonaAccessKey()));
         speechCloud.setEndpoint("https://tts.eu-west-1.ivonacloud.com");
     }
