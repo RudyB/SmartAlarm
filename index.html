@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Smart Alarm by RudyBermudez</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Smart Alarm</h1>
+      <h2 class="project-tagline">A Java based Smart Alarm application that gives the user a flash briefing on weather, stocks, news, and sports.</h2>
+      <a href="https://github.com/RudyBermudez/SmartAlarm" class="btn">View on GitHub</a>
+      <a href="https://github.com/RudyBermudez/SmartAlarm/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/RudyBermudez/SmartAlarm/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="smart-alarm" class="anchor" href="#smart-alarm" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Smart Alarm</h1>
+
+<p>A Java based Smart Alarm application that gives the user a flash briefing on weather, stocks, news, and sports.</p>
+
+<h1>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting Started</h1>
+
+<ol>
+<li>Sign Up for a <a href="https://developer.forecast.io/register">Forecast IO Developer Account</a> - FREE</li>
+<li>Sign Up for a <a href="https://www.ivona.com/">Ivona Developer Account</a> - FREE</li>
+<li>Configure SmartAlarmConfig.properties</li>
+<li>
+<code>cd</code> to smartAlarm directory in command line.</li>
+<li>Run <code>java -jar SmartAlarm.jar</code> from command line.</li>
+</ol>
+
+<h1>
+<a id="download" class="anchor" href="#download" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Download</h1>
+
+<p>You can download the latest jar from <a href="https://dl.dropboxusercontent.com/u/8895586/SmartAlarm.zip"><strong>here.</strong></a></p>
+
+<p>You can also compile it yourself. Scroll down for more info.</p>
+
+<h1>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configuration</h1>
+
+<p>A config file named SmartAlarmConfig.properties will be saved to the local directory.</p>
+
+<pre><code>Smart Alarm Configuration
+
+#Your first name
+Your_First_Name=Rudy
+
+#Whether or not you want the weather in the briefing
+Enable_Weather=true
+
+#Weather Units (Imperial or Metric)
+Weather_Units=Imperial
+
+#Enable if you want to automatically get your location from IP address
+Get_Weather_Location_from_IP=true
+
+#Manually Enter City Name and State if Get_Weather_Location_from_IP=false
+City_Name=Los Angeles
+State_Name=California
+
+#Enable if you want the current value of Bitcoin in the briefing
+Get_Bitcoin_Exchange_Rate=true
+
+#Enable if you want news stories in the briefing
+Enable_News=true
+#Set the news source (NYT or BBC)
+News_Source=BBC
+#Set the amount of stories you want read to you
+Number_of_News_Stories=4
+
+#Enable if you want sports in the briefing
+Enable_Sports=true
+
+#Enable if you want a song to be played after the briefing
+playSong=true
+#Enter the path of the song. Just the name if it is in directory
+songLocation=Had to Hear.mp3
+
+#You need to enter your Ivona Credentials here
+ivonaAccessKey=LettersAndNumbers
+ivonaSecretKey=MoreLettersAndNumbers
+
+#You need to enter your Forecast IO Credentials here
+ForecastIoApiKey=MoreLettersAndNumbers
+</code></pre>
+
+<h1>
+<a id="compilation" class="anchor" href="#compilation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Compilation</h1>
+
+<p>On Grade:</p>
+
+<pre><code>compile 'com.ivona:ivona-speechcloud-sdk-java:1.0.0'
+compile 'javazoom:jlayer:1.0.1'
+compile 'com.squareup.okhttp3:okhttp:3.2.0'
+</code></pre>
+
+<h1>
+<a id="common-errors" class="anchor" href="#common-errors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Common Errors</h1>
+
+<p><code>ERROR: Could not determine your location based off of you IP. Please manually enter your location</code></p>
+
+<ul>
+<li>Fix: Set Get_Weather_Location_from_IP=false and manually define City_Name and State_Name**</li>
+</ul>
+
+<p><br>
+<code>java.io.IOException: Connection to https://api.forecast.io/forecast//23.5633,63.7532/?units=us was not successful</code>    </p>
+
+<ul>
+<li>Fix: Edit the config file and enter the API Key for Forecast.io**</li>
+</ul>
+
+<h1>
+<a id="about" class="anchor" href="#about" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>About</h1>
+
+<ul>
+<li>Geo-Location is provided by <a href="http://ipinfo.io">IPinfo.io</a>
+</li>
+<li>City Name to Lat/Long is provided by Yahoo.</li>
+<li>Weather is provided by <a href="http://Forecast.io">Forecast.io</a>
+</li>
+<li>News is provided by <a href="http://BBC.com">BBC</a> and <a href="http://nytimes.com">New York Times.</a>
+</li>
+<li>Soccer is provided by <a href="http://api.football-data.org/index">football-data.org</a>
+</li>
+<li>Text to Speech is powered by <a href="https://www.ivona.com/">Amazon Ivona.</a>
+</li>
+</ul>
+
+<h1>
+<a id="author" class="anchor" href="#author" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Author</h1>
+
+<p>Rudy Bermudez  -  <a href="mailto:hello@rudybermudez.co">hello@rudybermudez.co</a></p>
+
+<h1>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h1>
+
+<p>Copyright 2016 Rudy Bermudez</p>
+
+<pre><code>Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+</code></pre>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/RudyBermudez/SmartAlarm">Smart Alarm</a> is maintained by <a href="https://github.com/RudyBermudez">RudyBermudez</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
