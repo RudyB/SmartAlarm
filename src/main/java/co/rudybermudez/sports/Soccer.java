@@ -24,7 +24,7 @@ import java.text.ParseException;
 public class Soccer {
     private final String mGameDatePattern = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 
-    private String mTimezone;
+    private final String mTimezone;
 
     public Soccer(String timezone) {
         mTimezone = timezone;
@@ -100,7 +100,7 @@ public class Soccer {
                 if (!game.getScoreHomeTeam().equals(-1) && !game.getScoreAwayTeam().equals(-1)) {
                     if (game.getScoreHomeTeam() > game.getScoreAwayTeam()) {
                         score = String.format("%s is currently leading %s, %s - %s.", game.getHomeTeam(), game.getAwayTeam(), game.getScoreHomeTeam(), game.getScoreAwayTeam());
-                    } else if (game.getScoreHomeTeam() == game.getScoreAwayTeam()) {
+                    } else if (game.getScoreHomeTeam().equals(game.getScoreAwayTeam())) {
                         score = String.format("The score is currently tied, %s - %s.", game.getScoreHomeTeam(), game.getScoreAwayTeam());
                     } else {
                         score = String.format("%s is currently leading %s, %s - %s.", game.getAwayTeam(), game.getHomeTeam(), game.getScoreAwayTeam(), game.getScoreHomeTeam());

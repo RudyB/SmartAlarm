@@ -15,12 +15,13 @@ import java.util.TimeZone;
 
 public class Greeting {
 
+    public final String goodbye = "That's all for now. Have a good day.";
     private final String mTimezone;
     /**
      * The variable mUsername is of type string and stores the user's first name. It is initialized in the default
      * constructor.
      */
-    String mUsername;
+    private final String mUsername;
 
     /**
      * The default constructor for Greeting takes a string parameter in the format "user_first_name".
@@ -48,7 +49,6 @@ public class Greeting {
      * config file
      *
      * @return method returns a string in format "Good Morning"
-     * @usage method is called in method hello() in class Greeting
      */
     private String getGreetingIntro() {
         SimpleDateFormat formatter = new SimpleDateFormat("HH");
@@ -76,17 +76,8 @@ public class Greeting {
         SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMMM d, yyyy h:mm a");
         formatter.setTimeZone(TimeZone.getTimeZone(mTimezone));
         String currentTime = formatter.format(new Date());
-        String greeting = String.format("%s %s, it is %s. Here is what you need to know to start your day.", getGreetingIntro(), getUsername(), currentTime);
-        return greeting;
+        return String.format("%s %s, it is %s. Here is what you need to know to start your day.", getGreetingIntro(), getUsername(), currentTime);
     }
 
-    /**
-     * goodbye() is a public method that returns the closing greeting message as a string.
-     *
-     * @return method returns the string "Thats all for now. Have a good day."
-     */
-    public String goodbye() {
-        return "Thats all for now. Have a good day.";
-    }
 
 }

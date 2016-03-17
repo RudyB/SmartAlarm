@@ -47,10 +47,7 @@ public class Game {
         mHoursUntilGame = TimeUnit.MILLISECONDS.toHours(millis) - TimeUnit.DAYS.toHours(TimeUnit.MILLISECONDS.toDays(millis));
         mMinutesUntilGame = TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis));
         mSecondsUntilGame = TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis));
-        if (mSecondsUntilGame < 0)
-            mHasStarted = true;
-        else
-            mHasStarted = false;
+        mHasStarted = mSecondsUntilGame < 0;
     }
 
     public Integer getScoreHomeTeam() {
@@ -80,9 +77,9 @@ public class Game {
     }
 
     public String getDaysUntilGameAsString() {
-        if (mDaysUntilGame.equals(0)) {
+        if (getDaysUntilGame().equals(0)) {
             return "Today";
-        } else if (mDaysUntilGame.equals(1)) {
+        } else if (getDaysUntilGame().equals(1)) {
             return "Today";
         } else {
             return String.format("In %s days", getDaysUntilGame());

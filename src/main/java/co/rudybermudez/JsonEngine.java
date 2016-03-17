@@ -45,6 +45,7 @@ public class JsonEngine {
             try {
                 socket.close();
             } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -55,7 +56,7 @@ public class JsonEngine {
         Response response = client.newCall(request).execute();
         if (response.isSuccessful())
             return response.body().string();
-        throw new IOException("Connection to " + url + "was not sucsessful");
+        throw new IOException("Connection to " + url + "was not successful");
     }
 
     public static String getForecastJSON(String apiKey, double latitude, double longitude, String unitHTML) throws IOException {
