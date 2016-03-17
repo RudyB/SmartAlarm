@@ -10,7 +10,7 @@ A Java based Smart Alarm application that gives the user a flash briefing on wea
 
 
 # Download
-You can download the latest jar from [**here.**](https://dl.dropboxusercontent.com/u/8895586/SmartAlarm.zip)
+You can download the latest jar from [**here.**](https://github.com/RudyBermudez/SmartAlarm/blob/gh-pages/SmartAlarm.zip?raw=true)
 
 You can also compile it yourself. Scroll down for more info.
 
