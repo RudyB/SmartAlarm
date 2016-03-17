@@ -4,13 +4,14 @@ A Java based Smart Alarm application that gives the user a flash briefing on wea
 # Getting Started
 1. Sign Up for a [Forecast IO Developer Account](https://developer.forecast.io/register) - FREE
 2. Sign Up for a [Ivona Developer Account](https://www.ivona.com/) - FREE
-3. Configure SmartAlarmConfig.properties
-4. ```cd``` to smartAlarm directory in command line.
-5. Run ```java -jar SmartAlarm.jar``` from command line.
+3. Download [SmartAlarm](https://github.com/RudyBermudez/SmartAlarm/blob/gh-pages/SmartAlarm.zip?raw=true)
+4. Configure SmartAlarmConfig.properties
+5. ```cd``` to smartAlarm directory in command line.
+6. Run ```java -jar SmartAlarm.jar``` from command line.
 
 
 # Download
-You can download the latest jar from [**here.**](https://github.com/RudyBermudez/SmartAlarm/blob/gh-pages/SmartAlarm.zip?raw=true)
+You can download the latest version from [**here.**](https://github.com/RudyBermudez/SmartAlarm/blob/gh-pages/SmartAlarm.zip?raw=true)
 
 You can also compile it yourself. Scroll down for more info.
 
@@ -63,6 +64,16 @@ ivonaSecretKey=MoreLettersAndNumbers
 ForecastIoApiKey=MoreLettersAndNumbers
 ```
 
+# Common Errors
+```ERROR: Could not determine your location based off of you IP. Please manually enter your location```
+
+- Fix: Set Get_Weather_Location_from_IP=false and manually define City_Name and State_Name
+
+<br>
+```java.io.IOException: Connection to https://api.forecast.io/forecast//23.5633,63.7532/?units=us was not successful```    
+
+- Fix: Edit the config file and enter the API Key for Forecast.io
+
 # Compilation
 On Grade:
 ```
@@ -71,17 +82,11 @@ compile 'javazoom:jlayer:1.0.1'
 compile 'com.squareup.okhttp3:okhttp:3.2.0'
 ```
 
-# Common Errors
-```ERROR: Could not determine your location based off of you IP. Please manually enter your location```
-    
-- Fix: Set Get_Weather_Location_from_IP=false and manually define City_Name and State_Name**
-
-<br>
-```java.io.IOException: Connection to https://api.forecast.io/forecast//23.5633,63.7532/?units=us was not successful```    
-    
-- Fix: Edit the config file and enter the API Key for Forecast.io**
-
 # About
+Feel Free to Fork
+
+[Trello Board](https://trello.com/b/2KvGaEX5) - If you would like to be added, just email me
+
 
 - Geo-Location is provided by [IPinfo.io](http://ipinfo.io)
 - City Name to Lat/Long is provided by Yahoo.
