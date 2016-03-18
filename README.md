@@ -4,14 +4,14 @@ A Java based Smart Alarm application that gives the user a flash briefing on wea
 # Getting Started
 1. Sign Up for a [Forecast IO Developer Account](https://developer.forecast.io/register) - FREE
 2. Sign Up for a [Ivona Developer Account](https://www.ivona.com/) - FREE
-3. Download [SmartAlarm](https://github.com/RudyBermudez/SmartAlarm/blob/gh-pages/SmartAlarm.zip?raw=true)
+3. Download [SmartAlarm](https://dl.dropboxusercontent.com/u/8895586/SmartAlarm.zip)
 4. Configure SmartAlarmConfig.properties
 5. ```cd``` to smartAlarm directory in command line.
 6. Run ```java -jar SmartAlarm.jar``` from command line.
 
 
 # Download
-You can download the latest version from [**here.**](https://github.com/RudyBermudez/SmartAlarm/blob/gh-pages/SmartAlarm.zip?raw=true)
+You can download the latest version from [**here.**](https://dl.dropboxusercontent.com/u/8895586/SmartAlarm.zip)
 
 You can also compile it yourself. Scroll down for more info.
 
