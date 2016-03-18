@@ -80,7 +80,7 @@ public class Game {
         if (getDaysUntilGame().equals(0)) {
             return "Today";
         } else if (getDaysUntilGame().equals(1)) {
-            return "Today";
+            return "Tomorrow";
         } else {
             return String.format("In %s days", getDaysUntilGame());
         }
