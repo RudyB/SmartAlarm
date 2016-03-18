@@ -64,32 +64,18 @@ public class JsonEngine {
         return makeConnection(url);
     }
 
-    public Object parseSimple(String stringToParse) {
-        try {
-            JSONObject jsonObject = new JSONObject(mRawJson);
-            return jsonObject.get(stringToParse);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public Object parseSimple(String stringToParse) throws JSONException {
+        JSONObject jsonObject = new JSONObject(mRawJson);
+        return jsonObject.get(stringToParse);
+
     }
 
-    public JSONObject getObject() {
-        try {
-            return new JSONObject(mRawJson);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public JSONObject getObject() throws JSONException {
+        return new JSONObject(mRawJson);
     }
 
-    public JSONArray getArray() {
-        try {
-            return new JSONArray(mRawJson);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public JSONArray getArray() throws JSONException {
+        return new JSONArray(mRawJson);
     }
 
 }
