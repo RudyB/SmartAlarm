@@ -37,6 +37,11 @@ Get_Weather_Location_from_IP=true
 City_Name=Los Angeles
 State_Name=California
 
+#Enable if you want to hear stocks in the briefing
+Enable_Stocks=true
+#Enter the ticker names of the stocks you would like to follow separated by commas
+Stock_Names=AAPL,GOOG,TSLA
+
 #Enable if you want the current value of Bitcoin in the briefing
 Get_Bitcoin_Exchange_Rate=true
 

@@ -19,6 +19,8 @@ public class Config {
     private String mCityName;
     private String mStateName;
     private Boolean mEnableBitcoin;
+    private Boolean mEnableStocks;
+    private String mStockNames;
     private Boolean mEnableNews;
     private String mNewsSource;
     private Integer mNumberOfStories;
@@ -48,6 +50,8 @@ public class Config {
             properties.setProperty("City_Name", "Las Vegas");
             properties.setProperty("State_Name", "Nevada");
             properties.setProperty("Get_Bitcoin_Exchange_Rate", "true");
+            properties.setProperty("Enable_Stocks", "true");
+            properties.setProperty("Stock_Names", "AAPL,GOOG,TSLA");
             properties.setProperty("Enable_News", "true");
             properties.setProperty("News_Source", "BBC");
             properties.setProperty("Number_of_News_Stories", "4");
@@ -92,6 +96,12 @@ public class Config {
                     mStateName = properties.getProperty("State_Name");
                 }
             }
+
+            mEnableStocks = Boolean.parseBoolean(properties.getProperty("Enable_Stocks"));
+            if (mEnableStocks) {
+                mStockNames = properties.getProperty("Stock_Names");
+            }
+
             mEnableBitcoin = Boolean.parseBoolean(properties.getProperty("Get_Bitcoin_Exchange_Rate"));
             mEnableNews = Boolean.parseBoolean(properties.getProperty("Enable_News"));
             if (mEnableNews) {
@@ -192,6 +202,14 @@ public class Config {
 
     public String getForecastApiKey() {
         return mForecastApiKey;
+    }
+
+    public Boolean getEnableStocks() {
+        return mEnableStocks;
+    }
+
+    public String getStockNames() {
+        return mStockNames;
     }
 
 }

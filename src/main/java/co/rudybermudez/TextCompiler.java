@@ -10,6 +10,7 @@ package co.rudybermudez;
 
 import co.rudybermudez.news.NewsReport;
 import co.rudybermudez.sports.Soccer;
+import co.rudybermudez.stocks.StockReport;
 import co.rudybermudez.weather.Weather;
 
 public class TextCompiler {
@@ -57,6 +58,11 @@ public class TextCompiler {
                 weatherTxt = currentWeather + "\n" + futureWeather;
             }
 
+            // Stocks
+            String stockTxt = "";
+            if (mConfig.getEnableStocks())
+                stockTxt = new StockReport(mConfig.getStockNames()).printStocks();
+
             // Bitcoin
             String btcTxt = "";
             if (mConfig.getEnableBitcoin())
@@ -73,7 +79,7 @@ public class TextCompiler {
                 Soccer soccer = new Soccer(location.getTimeZone());
                 sportsTxt = soccer.getUpcomingGames() + soccer.getLeagueTable();
             }
-            return String.format("%s \n\n%s \n\n%s \n%s%s \n\n%s", helloGreeting, weatherTxt, btcTxt, newsTxt, sportsTxt, goodbyeGreeting);
+            return String.format("%s \n\n%s \n\n%s \n\n%s \n%s%s \n\n%s", helloGreeting, weatherTxt, stockTxt, btcTxt, newsTxt, sportsTxt, goodbyeGreeting);
         }
 
     }
