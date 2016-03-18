@@ -134,6 +134,8 @@ public class Location {
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error loading latitude and longitude");
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
     }
