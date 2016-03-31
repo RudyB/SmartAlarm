@@ -13,10 +13,21 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+/**
+ * The class that handles the opening and closing greetings of the smart alarm program.
+ */
 public class Greeting {
 
+    /**
+     * The Goodbye.
+     */
     public final String goodbye = "That's all for now. Have a good day.";
+
+    /**
+     * The timezone of the user.
+     */
     private final String mTimezone;
+
     /**
      * The variable mUsername is of type string and stores the user's first name. It is initialized in the default
      * constructor.

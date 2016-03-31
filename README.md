@@ -53,8 +53,8 @@ News_Source=BBC
 #Set the amount of stories you want read to you
 Number_of_News_Stories=4
 
-#Enable if you want sports in the briefing
-Enable_Sports=true
+# Enable if you want soccer in the briefing
+Enable_Soccer=true
 
 #Enable if you want a song to be played after the briefing
 playSong=true
