@@ -8,12 +8,21 @@ package co.rudybermudez;
  * @Package: co.rudybermudez
  */
 
+
+import co.rudybermudez.tts.IvonaEngine;
+
+/**
+ * Essentially the driver class of the SmartAlarm Program
+ */
 public class SmartAlarm {
 
+    /**
+     * Starts the smartAlarm.
+     */
     public void run() {
         try {
             Config config = new Config();
-            new TextToSpeech(config).compileNews();
+            new IvonaEngine(config).compileNews();
             PlayMP3.playNews();
             if (config.getEnableMusic()) {
                 PlayMP3.playSong(config.getSongLocation());

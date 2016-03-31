@@ -5,7 +5,7 @@ package co.rudybermudez.sports;
  * @Email:   hello@rudybermudez.co
  * @Date:    Mar 10, 2016
  * @Project: SmartAlarm
- * @Package: co.rudybermudez
+ * @Package: co.rudybermudez.sports
  */
 
 import co.rudybermudez.JsonEngine;
@@ -21,15 +21,39 @@ import java.io.IOException;
 import java.text.ParseException;
 
 
-public class Soccer {
+// TODO:rmb 3/23/16 Allow the user to enter the name of a team in the config file. Then search throw all leagues in the api to find the team. Follow respective links to get the league table and next matches.
+
+/**
+ * Class that downloads and parses soccer scores. Uses http://api.football-data.org
+ */
+public class SoccerReport {
+    /**
+     * The game date pattern of the football-data API.
+     */
     private final String mGameDatePattern = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 
-    private final String mTimezone;
+    /**
+     * The IANA timezone name of the user.
+     */
+    private final String mUserTimezone;
 
-    public Soccer(String timezone) {
-        mTimezone = timezone;
+    /**
+     * Instantiates a new SoccerReport.
+     *
+     * @param userTimezone the user's Timezone
+     */
+    public SoccerReport(String userTimezone) {
+        mUserTimezone = userTimezone;
     }
 
+    /**
+     * Init connection json object.
+     *
+     * @param sUrl the url as String
+     * @return the root json object
+     * @throws IOException   if unable to connect to url
+     * @throws JSONException if json cannot be parsed
+     */
     private JSONObject initConnection(String sUrl) throws IOException, JSONException {
         OkHttpClient client = new OkHttpClient();
         Headers headers = new Headers.Builder()
@@ -44,6 +68,13 @@ public class Soccer {
         return new JSONObject(response.body().string());
     }
 
+    /**
+     * Gets the current league table.
+     *
+     * @return "%s is currently in first place with a lead of %s points over %s."
+     * @throws IOException   If the url is inaccessible
+     * @throws JSONException if JSON cannot be parsed
+     */
     public String getLeagueTable() throws IOException, JSONException {
         JSONObject currentRankings = initConnection("http://api.football-data.org/alpha/soccerseasons/399/leagueTable");
         JSONObject firstPlaceTeam = currentRankings.optJSONArray("standing").optJSONObject(0);
@@ -58,12 +89,19 @@ public class Soccer {
         return String.format("%s is currently in first place with a lead of %s points over %s.", firstPlaceName, lead.toString(), secondPlaceName);
     }
 
-    public String getUpcomingGames() throws Exception {
+    /**
+     * Gets upcoming games.
+     *
+     * @return the upcoming games for a team
+     * @throws IOException   if the API cannot be reached
+     * @throws JSONException if the JSON cannot be parsed
+     */
+    public String getUpcomingGames() throws IOException, JSONException {
         JSONObject schedule = initConnection("http://api.football-data.org/alpha/teams/81/fixtures?timeFrame=n8");
         JSONArray numOfGames = schedule.getJSONArray("fixtures");
         String games = "";
         if (numOfGames.length() == 0) {
-            return "FC Barcelona does not have any games for the next 7 days";
+            return "FC Barcelona does not have any games for the next 7 days.\n";
         } else {
             for (int i = 0; i < numOfGames.length(); i++) {
                 games += getGameDetails(schedule, i);
@@ -72,6 +110,12 @@ public class Soccer {
         }
     }
 
+    /**
+     * Gets the stadium name.
+     *
+     * @param homeTeam the name of the home team
+     * @return the stadium name
+     */
     private String getStadiumName(String homeTeam) {
 
         String homeStadium;
@@ -85,7 +129,15 @@ public class Soccer {
         return homeStadium;
     }
 
-    private String getGameDetails(JSONObject schedule, Integer gameNum) throws Exception {
+    /**
+     * Gets game details for a specific game in the schedule.
+     *
+     * @param schedule the schedule of upcoming games.
+     * @param gameNum  the game number in the schedule
+     * @return the game details
+     * @throws JSONException if the JSON cannot be parsed
+     */
+    private String getGameDetails(JSONObject schedule, Integer gameNum) throws JSONException {
         try {
             String homeTeam = schedule.getJSONArray("fixtures").getJSONObject(gameNum).getString("homeTeamName");
             String awayTeam = schedule.getJSONArray("fixtures").getJSONObject(gameNum).getString("awayTeamName");
@@ -94,7 +146,7 @@ public class Soccer {
             Integer awayTeamScore = schedule.getJSONArray("fixtures").getJSONObject(gameNum).getJSONObject("result").getInt("goalsAwayTeam");
             String stadiumName = getStadiumName(homeTeam);
 
-            Game game = new Game(homeTeam, awayTeam, gameDate, homeTeamScore, awayTeamScore, stadiumName, mGameDatePattern, mTimezone);
+            Game game = new Game(homeTeam, awayTeam, gameDate, homeTeamScore, awayTeamScore, stadiumName, mGameDatePattern, mUserTimezone);
             if (game.hasStarted()) {
                 String score = "";
                 if (!game.getScoreHomeTeam().equals(-1) && !game.getScoreAwayTeam().equals(-1)) {
@@ -112,7 +164,7 @@ public class Soccer {
             }
 
         } catch (ParseException e) {
-            throw new Exception("Error: The API for api.football-data.org has changed and the date cannot be parsed. Please notify the developer.");
+            throw new JSONException("Error: The API for api.football-data.org has changed and the date cannot be parsed. Please notify the developer.");
         }
     }
 }

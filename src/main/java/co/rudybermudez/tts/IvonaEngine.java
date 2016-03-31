@@ -1,4 +1,4 @@
-package co.rudybermudez;
+package co.rudybermudez.tts;
 
 /*
  * @Author:  Rudy Bermudez
@@ -8,6 +8,8 @@ package co.rudybermudez;
  * @Package: co.rudybermudez
  */
 
+import co.rudybermudez.Config;
+import co.rudybermudez.TextCompiler;
 import com.ivona.services.tts.IvonaSpeechCloudClient;
 import com.ivona.services.tts.model.CreateSpeechRequest;
 import com.ivona.services.tts.model.CreateSpeechResult;
@@ -19,32 +21,41 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 
 /**
- * Class that generates sample synthesis and retrieves audio stream.
+ * Class that generates text-to-speech synthesis and retrieves audio stream. Converts the text of
+ * {@link TextCompiler}.soundAlarm() to audio and saves it with the filename speech.mp3
  */
+public class IvonaEngine {
 
-public class TextToSpeech {
 
+    /**
+     * mConfig is an instance of the class {@link Config} that gets the user properties from SmartAlarmConfig.properties.
+     */
     private final Config mConfig;
-    private IvonaSpeechCloudClient speechCloud;
 
-    public TextToSpeech(Config config) {
+
+    /**
+     * mSpeechCloud is an instance of {@link IvonaSpeechCloudClient} that synthesizes the text into speech.
+     */
+    private IvonaSpeechCloudClient mSpeechCloud;
+
+
+    /**
+     * Default constructor. Initializes the config, and the {@link IvonaSpeechCloudClient} mSpeechCloud.
+     *
+     * @param config An instance of {@link Config}
+     */
+    public IvonaEngine(Config config) {
         mConfig = config;
-    }
-
-    private void init() {
-        speechCloud = new IvonaSpeechCloudClient(new IvonaCredentials(mConfig.getIvonaSecretKey(), mConfig.getIvonaAccessKey()));
-        speechCloud.setEndpoint("https://tts.eu-west-1.ivonacloud.com");
+        mSpeechCloud = new IvonaSpeechCloudClient(new IvonaCredentials(mConfig.getIvonaSecretKey(), mConfig.getIvonaAccessKey()));
+        mSpeechCloud.setEndpoint("https://tts.eu-west-1.ivonacloud.com");
     }
 
     /**
-     * compileNews() converts the text of TextCompiler.soundAlarm() to audio as speech.mp3
+     * compileNews() converts the text of {@link TextCompiler}.soundAlarm() to audio and saves it with the filename speech.mp3
      *
-     * @throws Exception
+     * @throws Exception exception is caused by {@link TextCompiler}.soundAlarm()
      */
     public void compileNews() throws Exception {
-
-        init();
-
         String outputFileName = "speech.mp3";
         CreateSpeechRequest createSpeechRequest = new CreateSpeechRequest();
         Input input = new Input();
@@ -62,22 +73,12 @@ public class TextToSpeech {
 
         try {
 
-            CreateSpeechResult createSpeechResult = speechCloud.createSpeech(createSpeechRequest);
-
-//            System.out.println("\nSuccess sending request:");
-//            System.out.println(" content type:\t" + createSpeechResult.getContentType());
-//            System.out.println(" request id:\t" + createSpeechResult.getTtsRequestId());
-//            System.out.println(" request chars:\t" + createSpeechResult.getTtsRequestCharacters());
-//            System.out.println(" request units:\t" + createSpeechResult.getTtsRequestUnits());
-
+            CreateSpeechResult createSpeechResult = mSpeechCloud.createSpeech(createSpeechRequest);
             System.out.println("\n\n\n\nStarting to retrieve audio stream");
-
             in = createSpeechResult.getBody();
             outputStream = new FileOutputStream(new File(outputFileName));
-
             byte[] buffer = new byte[2 * 1024];
             int readBytes;
-
             while ((readBytes = in.read(buffer)) > 0) {
                 // In the example we are only printing the bytes counter,
                 // In real-life scenario we would operate on the buffer
@@ -85,7 +86,6 @@ public class TextToSpeech {
                 outputStream.write(buffer, 0, readBytes);
             }
 
-            //System.out.println("\nFile saved: " + outputFileName);
             System.out.println("Audio Stream Received");
         } finally {
             if (in != null) {

@@ -8,18 +8,40 @@ package co.rudybermudez;
  * @Package: co.rudybermudez
  */
 
-import co.rudybermudez.news.NewsReport;
-import co.rudybermudez.sports.Soccer;
-import co.rudybermudez.stocks.StockReport;
-import co.rudybermudez.weather.Weather;
 
+import co.rudybermudez.news.NewsReport;
+import co.rudybermudez.sports.SoccerReport;
+import co.rudybermudez.stocks.StockReport;
+import co.rudybermudez.weather.WeatherReport;
+
+/**
+ * Class that compiles the text from all user enabled methods.
+ */
 public class TextCompiler {
+
+    /**
+     * mConfig is an instance of the class {@link Config} that gets the user properties from SmartAlarmConfig.properties
+     */
     private final Config mConfig;
 
+
+    /**
+     * Default constructor of class TextCompiler. Initializes mConfig.
+     *
+     * @param config An instance of {@link Config}
+     */
     public TextCompiler(Config config) {
         mConfig = config;
     }
 
+
+    /**
+     * soundAlarm() will gather the text output from all of the user enabled methods and then concatenate them all and
+     * return the output.
+     *
+     * @return A string containing all of the text of enabled methods. This is the full output of Smart Alarm
+     * @throws Exception if there is no connection to the internet or if user types in unit that does not exist
+     */
     public String soundAlarm() throws Exception {
         Location.Units units;
         System.out.println("Pulling Data from the Web... Hold on a bit\n\n");
@@ -46,14 +68,14 @@ public class TextCompiler {
             String helloGreeting = (greeting.hello());
             String goodbyeGreeting = (greeting.goodbye);
 
-            // Weather
+            // WeatherReport
             String weatherTxt = "";
             if (mConfig.getEnableWeather()) {
                 String currentWeather;
                 String futureWeather;
-                Weather weather = new Weather(location);
-                currentWeather = (weather.getCurrentWeather());
-                futureWeather = (weather.getFutureWeather(1));
+                WeatherReport weatherReport = new WeatherReport(location);
+                currentWeather = (weatherReport.getCurrentWeather());
+                futureWeather = (weatherReport.getFutureWeather(1));
 
                 weatherTxt = currentWeather + "\n" + futureWeather;
             }
@@ -66,18 +88,18 @@ public class TextCompiler {
             // Bitcoin
             String btcTxt = "";
             if (mConfig.getEnableBitcoin())
-                btcTxt = (Btc.getCurrentPrice());
+                btcTxt = (Btc.getCurrentValue());
 
             // News
             String newsTxt = "";
             if (mConfig.getEnableNews())
                 newsTxt = (new NewsReport().getCurrentStories(mConfig.getNewsSource(), mConfig.getNumberOfStories()));
 
-            // Soccer
+            // SoccerReport
             String sportsTxt = "";
-            if (mConfig.getEnableSports()) {
-                Soccer soccer = new Soccer(location.getTimeZone());
-                sportsTxt = soccer.getUpcomingGames() + soccer.getLeagueTable();
+            if (mConfig.getEnableSoccer()) {
+                SoccerReport soccerReport = new SoccerReport(location.getTimeZone());
+                sportsTxt = soccerReport.getUpcomingGames() + soccerReport.getLeagueTable();
             }
             return String.format("%s \n\n%s \n\n%s \n\n%s \n%s%s \n\n%s", helloGreeting, weatherTxt, stockTxt, btcTxt, newsTxt, sportsTxt, goodbyeGreeting);
         }

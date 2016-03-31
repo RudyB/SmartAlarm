@@ -7,8 +7,16 @@
 
 import co.rudybermudez.SmartAlarm;
 
+/**
+ * The Main class.
+ */
 public class Main {
 
+    /**
+     * The entry point of application.
+     *
+     * @param args smart alarm takes none
+     */
     public static void main(String[] args) {
         new SmartAlarm().run();
     }
