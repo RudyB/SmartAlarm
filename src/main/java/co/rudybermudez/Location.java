@@ -185,7 +185,7 @@ public class Location {
             if (cityAndStateValid) {
                 mCity = city;
                 mState = state;
-                List<String> longlat = Arrays.asList(jsonEngine.getObject().optString("loc").split(","));
+                List<String> longlat = Arrays.asList(jsonEngine.getObject().getString("loc").split(","));
                 mLatitude = Double.parseDouble(longlat.get(0));
                 mLongitude = Double.parseDouble(longlat.get(1));
                 loadTimezone();
@@ -203,10 +203,11 @@ public class Location {
      */
     private void getLatitudeLongitude() {
         try {
-            JsonEngine connection = new JsonEngine(JsonEngine.makeConnection("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22" + saltLocationInput(mCity) + "%2C" + saltLocationInput(mState) + "%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys"));
-            JSONObject item = connection.getObject().optJSONObject("query").optJSONObject("results").optJSONObject("channel").optJSONObject("item");
-            mLatitude = item.optDouble("lat");
-            mLongitude = item.optDouble("long");
+            String url = "https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text = '"+ mCity +"," + mState +"') & format=json & env=store datatables.org alltableswithkeys";
+            JsonEngine connection = new JsonEngine(JsonEngine.makeConnection(url));
+            JSONObject item = connection.getObject().getJSONObject("query").getJSONObject("results").getJSONObject("channel").getJSONObject("item");
+            mLatitude = item.getDouble("lat");
+            mLongitude = item.getDouble("long");
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error loading latitude and longitude");
@@ -225,26 +226,6 @@ public class Location {
             mTimeZone = new JSONObject(mJsonData).getString("timezone");
         } catch (JSONException | IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    /**
-     * Format's the user's city name and state name for the getLatitudeLongitude method.
-     *
-     * @param locationName The city name or state name as a String
-     * @return A properly formatted string for use in the getLatitudeLongitude method
-     */
-    private String saltLocationInput(String locationName) {
-        if (locationName.contains(" ")) {
-            String[] arrCity = locationName.split(" ");
-            String saltedCity = "";
-            for (String string : arrCity) {
-
-                saltedCity += string;
-            }
-            return saltedCity;
-        } else {
-            return locationName;
         }
     }
 
