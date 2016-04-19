@@ -1,6 +1,6 @@
 # Smart Alarm
 
-A Java based Smart Alarm application that gives the user a flash briefing on weather, stocks, news, and sports.
+A Java based Smart Alarm application that gives the user a flash briefing on weather, stocks, news, and sports. Based off of [alarmpi](https://github.com/skiwithpete/alarmpi) project by SkiWithPete.
 # Getting Started
 1. Sign Up for a [Forecast IO Developer Account](https://developer.forecast.io/register) - FREE
 2. Sign Up for a [Ivona Developer Account](https://www.ivona.com/) - FREE
