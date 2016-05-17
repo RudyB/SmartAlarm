@@ -7,7 +7,7 @@ A Java based Smart Alarm application that gives the user a flash briefing on wea
 3. Download [SmartAlarm](https://dl.dropboxusercontent.com/u/8895586/SmartAlarm.zip)
 4. Configure SmartAlarmConfig.properties
 5. ```cd``` to smartAlarm directory in command line.
-6. Run ```java -jar SmartAlarm.jar``` from command line.
+6. Run ```sudo java -jar SmartAlarm.jar``` from command line.
 
 
 # Download
@@ -79,8 +79,8 @@ ForecastIoApiKey=MoreLettersAndNumbers
 
 - Fix: Edit the config file and enter the API Key for Forecast.io
 
-# Compilation
-On Grade:
+# Dependencies
+On Gradle:
 ```
 compile 'com.ivona:ivona-speechcloud-sdk-java:1.0.0'
 compile 'javazoom:jlayer:1.0.1'
